@@ -1,0 +1,28 @@
+[
+  {
+    "cpu": ${CPU},
+    "image": "${DOCKER_IMAGE_NAME}",
+    "memory": ${MEMORY},
+    "memoryReservation": ${MEMORY_RESERVATION},
+    "name": "${CONTAINER_NAME}",
+    "networkMode": "awsvpc",
+    "essential": true,
+    "environment": ${ENVIRONMENT},
+    "portMappings": [
+      {
+        "containerPort": ${CONTAINER_PORT},
+        "protocol": "tcp",
+        "hostPort": ${HOST_PORT}
+      }
+    ],
+    "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "/aws/ecs/${TASK_DEFINITION_NAME}",
+          "awslogs-region": "us-east-1",
+          "awslogs-stream-prefix": "ecs",
+          "awslogs-create-group": "true"
+        }
+    }
+  }
+]
